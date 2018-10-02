@@ -66,3 +66,25 @@ In the above line of code , you need to change the path from `"/media/joseph/New
 3. The above script will split the final dataset into two parts, one for testing and another for training.
 
 4. You will get the accuracy score using a module from sklearn.
+
+
+#### Description of Files
+
+This repsitory has the data we collected from differnt people. There are different stages through which this data is 
+processed so that it can be used for the ML model.
+
+1. Raw_data :
+This has the raw data collected using the Headsets without any modifications done to it.
+
+2. Concat_Data :
+This has the raw data modified in the following way. Each 10 rows beginning from the first row are concatenated at the end of first row ie., if we have a row with 10 columns each after concatenation we get 100 columns for the each row.
+For example, at the end of 1st Row we concatenate rows 2 to 10 one after another. This is repeated for each row till (n-9)th row and remove the last 9 rows.
+
+3. Norm_Data :
+This has the concat_data normalised column-wise. This is a part of pre-processing the data so that the data is consistent and prevents overfitting.
+
+4. Final DataSet :
+This has all the data points of different individuals merged into one file. This is the dataset we used for the model.
+
+5. Py_Scripts :
+This has different python script files used to do the tasks mentioned above.
