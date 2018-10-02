@@ -16,7 +16,7 @@ If you have the neuro Headset, go to [With HeadSet](#with-headset), else go to [
 
 
 
-#### With HeadSet
+#### With HeadSet (Implemented in Ubuntu Desktop)
 
 For those who have the neuro headset, they may proceed as following to utilise my project-
 
@@ -31,7 +31,7 @@ sudo rfcomm bind /dev/rfcomm1 74:E5:43:D5:6C:07
 ls -l /dev/rfcomm1
 ```
 
-You need to go to your bluetooth settings and then find out the port by which you are connecting to the headset(example-COM3,COM2 etc.) and then replace that port instead of rfcomm1 in the above code(example- rfcomm2,rfcomm3 etc.)
+You need to go to your bluetooth settings and then find out the port by which you are connecting to the headset and then replace that port instead of rfcomm1 in the above code(example- rfcomm2,rfcomm3 etc.)
 
 4. You are now connected to the headset.
 
@@ -41,15 +41,15 @@ input_csv = pd.read_csv("/media/arpit/New Volume/3.Projects/EEG_Project/Raw_Data
 ```
 Actually the data you collected is written in a csv file in the directory where you have run the above script "Final_+project.py" in a file named **Predict_Final.csv** , so instead of  ` "/media/arpit/New Volume/3.Projects/EEG_Project/Raw_Data/Total_Normalised_data_Collection" ` in above line of code you have to put the address of the directory in which you have run the script "Final_+project.py".
 
-- make sure you change only the path and not the file name that is the file names "Predict_Final.csv" and "Predict_Concat_Final.csv" remains same .
+- make sure you change only the path and not the file name that is the file names "Predict_Final.csv" and "Predict_Concat_Final.csv" remains same.
 
-Moreover there is another line of code wher you need to change - `"/media/arpit/New Volume/3.Projects/ARIES_EEG_Project/Raw_Data/Total_Normalised_data_Collection/Predict_Concat_Final.csv"`. Here also instead of `"/media/joseph/New Volume/3.Projects/ARIES_EEG_Project/Raw_Data/Total_Normalised_data_Collection"` , put the address of the directory where you have run the script "Final_+project.py".
+Moreover there is another line of code where you need to change - `"/media/arpit/New Volume/3.Projects/ARIES_EEG_Project/Raw_Data/Total_Normalised_data_Collection/Predict_Concat_Final.csv"`. Here also instead of `"/media/joseph/New Volume/3.Projects/ARIES_EEG_Project/Raw_Data/Total_Normalised_data_Collection"` , put the address of the directory where you have run the script "Final_+project.py".
 
 6. My training dataset is for only two actions - clapping and blinking. So after running the script ,perform one of the above actions and after some time your action will be predicted.
 
 #### Without HeadSet
 
-For those of you who do not have the neuroheadset and wish to see the accuracy of my model, proceed as following -
+For those of you who do not have the neuro sky mindwave headset and wish to see the accuracy of my model, proceed as following -
 
 1. Download the file "Final_Normalised_Dataset.csv" from Final Dataset folder in my repository.
 
@@ -63,6 +63,28 @@ data = pd.read_csv("/media/joseph/New Volume/3.Projects/ARIES_EEG_Project/Raw_Da
 
 In the above line of code , you need to change the path from `"/media/joseph/New Volume/3.Projects/ARIES_EEG_Project/Raw_Data/Total_Normalised_data_Collection/Final_Normalised_DataSet.csv"` to the path where you have downloaded the `"Final_Normalised_Dataset.csv"` file.
 
-3. The above script will split the final dataset into two parts, one for testing and aanother for training.
+3. The above script will split the final dataset into two parts, one for testing and another for training.
 
-4. You will get the accuracy score through various algorithms.
+4. You will get the accuracy score using a module from sklearn.
+
+
+#### Description of Files
+
+This repsitory has the data we collected from differnt people. There are different stages through which this data is 
+processed so that it can be used for the ML model.
+
+1. Raw_data :
+This has the raw data collected using the Headsets without any modifications done to it.
+
+2. Concat_Data :
+This has the raw data modified in the following way. Each 10 rows beginning from the first row are concatenated at the end of first row ie., if we have a row with 10 columns each after concatenation we get 100 columns for the each row.
+For example, at the end of 1st Row we concatenate rows 2 to 10 one after another. This is repeated for each row till (n-9)th row and remove the last 9 rows.
+
+3. Norm_Data :
+This has the concat_data normalised column-wise. This is a part of pre-processing the data so that the data is consistent and prevents overfitting.
+
+4. Final DataSet :
+This has all the data points of different individuals merged into one file. This is the dataset we used for the model.
+
+5. Py_Scripts :
+This has different python script files used to do the tasks mentioned above.
